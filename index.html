@@ -264,7 +264,7 @@ form {
           PasswordValid === true
         ) {
           const UserAccess = localStorage.setItem("UserAccess", "Granted");
-          window.location.href = "index2.html";
+          window.location.href = "./index2.html";
           console.log(true);
         } else {
           console.log(false);
@@ -273,7 +273,7 @@ form {
       window.addEventListener("load", () => {
         if (JSON.parse(localStorage.getItem("UserAccess") === "Granted")) {
           setTimeout(() => {
-            window.location.pathname=".index2.html"
+            window.location.pathname="./index2.html"
           }, 2000);
         }
       });
