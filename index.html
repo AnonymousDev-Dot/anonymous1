@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+  </head>
+  <style>
+
+@media (min-width: 0px) and (max-width: 319px) {
+  
+  .notFound{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  main{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+
+  }
+
+}
+    
+  /* // Large devices (desktops, 992px and Down)*/
+  @media (min-width: 769px) and (max-width: 2000px) {
+  
+  .notFound{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  main{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+
+  }
+
+}
+
+  /* Small and Medium devices ( Mobiles, tablets, 768px and Down )  */
+@media (min-width: 320px) and (max-width: 768px) {
+
+.notFound{
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+
+form {
+      border: 2px solid gold;
+      width: max-content;
+      height: max-content;
+      padding: 20px 20px;
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      row-gap: 15px;
+    }
+
+    form > div {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+    }
+
+    form > div > label {
+      font-size: 18px;
+    }
+
+    form > div > input {
+      width: max-content;
+      height: 30px;
+      font-size: 18px;
+      padding-left: 15px;
+      border: 1px solid rgb(0, 0, 0);
+    }
+
+    form > div > span {
+      height: 20px;
+      width: 100%;
+      background-color: transparent;
+      border-radius: 15px;
+      color: black;
+      font-size: 18px;
+    }
+
+}
+
+  
+  </style>
+  <body>
+  
+    <div class="notFound">
+      <h3>Page Not Found In This Device</h3>
+      </div>
+    <main>
+    <form>
+      <h3 style="text-align: center">Sign Up</h3>
+      <div class="Username">
+        <label for="Nametxt">Name</label>
+        <input type="text" id="Nametxt" />
+        <span id="nameError"></span>
+      </div>
+      <div class="Email">
+        <label for="Emailtxt">Email</label>
+        <input type="text" id="Emailtxt" />
+        <span id="emailError"></span>
+      </div>
+      <div class="Password" style="display: flex; flex-direction: column">
+        <label for="Passwordtxt">Password</label>
+        <input type="text" id="Passwordtxt" />
+        <span id="passError"></span>
+      </div>
+      <div
+        class="btns"
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          column-gap: 18px;
+        "
+      >
+        <button type="reset" style="width: 100px; height: 40px">Clear</button>
+        <button type="button" id="signupbtn" style="width: 100px; height: 40px">
+          SignUp
+        </button>
+      </div>
+    </form>
+  </main>
+    <script>
+      const signupbtn = document.getElementById("signupbtn");
+
+      const Nametxt = document.getElementById("Nametxt");
+      const Emailtxt = document.getElementById("Emailtxt");
+      const Passwordtxt = document.getElementById("Passwordtxt");
+
+      let NameValid = false;
+      let EmailValid = false;
+      let PasswordValid = false;
+
+      async function Validation() {
+        Nametxt.addEventListener("keyup", () => {
+          if (Nametxt.value === "") {
+            document.getElementById("nameError").textContent = "";
+            NameValid = false;
+            console.warn(`Name Current : ${NameValid}`);
+          } else {
+            if (Nametxt.value.length <= 4) {
+              document.getElementById("nameError").textContent =
+                "Atleast 5 Words";
+              document.getElementById("nameError").style.color = "red";
+              NameValid = false;
+              console.warn(`Name Atleast 5 Word  : ${NameValid}`);
+            } else if (Nametxt.value.length >= 4) {
+              document.getElementById("nameError").textContent =
+                "Valid Username";
+              document.getElementById("nameError").style.color = "green";
+              setTimeout(() => {
+                NameValid = true;
+                console.warn(`Name Valid : ${NameValid}`);
+              }, 1000);
+            } else {
+              document.getElementById("nameError").textContent = "";
+              NameValid = false;
+              console.warn(`Name Current : ${NameValid}`);
+            }
+          }
+        });
+
+        Emailtxt.addEventListener("keyup", () => {
+          if (Emailtxt.value === "") {
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("emailError").style.color = "red";
+            EmailValid = false;
+            console.warn(`Email Current : ${EmailValid}`);
+          } else {
+            if (
+              Emailtxt.value.length >= 15 &&
+              Emailtxt.value.includes("@gmail") &&
+              Emailtxt.value.includes(".com")
+            ) {
+              document.getElementById("emailError").textContent = "Valid Email";
+              document.getElementById("emailError").style.color = "green";
+              setTimeout(() => {
+                EmailValid = true;
+                console.warn(`Email Valid : ${EmailValid}`);
+              }, 1000);
+            } else {
+              document.getElementById("emailError").textContent = " ";
+              EmailValid = false;
+              console.warn(`Email Current : ${EmailValid}`);
+            }
+          }
+        });
+        Passwordtxt.addEventListener("keyup", () => {
+          if (Passwordtxt.value === "") {
+            document.getElementById("passError").style.color = "red";
+            document.getElementById("passError").textContent = "";
+            PasswordValid = false;
+            console.warn(`Password Current : ${PasswordValid}`);
+          } else {
+            if (Passwordtxt.value.length <= 5) {
+              document.getElementById("passError").textContent =
+                "Weak Password";
+              document.getElementById("passError").style.color = "red";
+              PasswordValid = false;
+              console.warn(`Weak : ${PasswordValid}`);
+            } else if (Passwordtxt.value.length <= 8) {
+              document.getElementById("passError").textContent =
+                "Medium Password";
+              document.getElementById("passError").style.color = "yellow";
+              PasswordValid = false;
+              console.warn(`Medium : ${PasswordValid}`);
+            } else if (Passwordtxt.value.length <= 10) {
+              document.getElementById("passError").textContent =
+                "Strong Password";
+              setTimeout(() => {
+                document.getElementById("passError").style.color = "green";
+                PasswordValid = true;
+                console.warn(`Password Valid : ${PasswordValid}`);
+              }, 1000);
+            } else {
+              document.getElementById("passError").textContent = "";
+              EmailValid = false;
+              console.warn(`Name Empty : ${PasswordValid}`);
+            }
+          }
+        });
+      }
+
+      Validation();
+
+      signupbtn.addEventListener("click", () => {
+        Validation();
+        if (
+          EmailValid === true &&
+          EmailValid === true &&
+          PasswordValid === true
+        ) {
+          const UserAccess = localStorage.setItem("UserAccess", "Granted");
+          window.location.href = "/main.html";
+          console.log(true);
+        } else {
+          console.log(false);
+        }
+      });
+      window.addEventListener("load", () => {
+        if (JSON.parse(localStorage.getItem("UserAccess") === "Granted")) {
+          setTimeout(() => {
+            window.location.pathname="./main.html"
+          }, 2000);
+        }
+      });
+
+    </script>
+    
+  </body>
+</html>
